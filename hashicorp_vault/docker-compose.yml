@@ -23,11 +23,11 @@ services:
       VAULT_SECRET_ID: "db-secret-id"
     command: vault server -config=/vault/vault-config -log-level=debug
     volumes:
-      - ./vault-server-config.hcl:/vault/vault-config
-      - ./vault-role-id:/vault/vault-role-id
-      - ./vault-secret-id:/vault/vault-secret-id
-      - ./configuration.sh:/vault/configuration.sh
-      - ./policy.hcl:/vault/policy.hcl
+      - ./cfg/vault-server-config.hcl:/vault/vault-config
+      - ./cfg/vault-role-id:/vault/vault-role-id
+      - ./cfg/vault-secret-id:/vault/vault-secret-id
+      - ./cfg/configuration.sh:/vault/configuration.sh
+      - ./cfg/policy.hcl:/vault/policy.hcl
     cap_add:
       - IPC_LOCK
     networks:
@@ -44,9 +44,9 @@ services:
       VAULT_SECRET_ID: "db-secret-id"
     command: vault agent -config=/vault/vault-config -log-level=debug
     volumes:
-      - ./vault-agent-config.hcl:/vault/vault-config
-      - ./vault-role-id:/vault/vault-role-id
-      - ./vault-secret-id:/vault/vault-secret-id
+      - ./cfg/vault-agent-config.hcl:/vault/vault-config
+      - ./cfg/vault-role-id:/vault/vault-role-id
+      - ./cfg/vault-secret-id:/vault/vault-secret-id
     cap_add:
       - IPC_LOCK
     networks:
