@@ -1,0 +1,81 @@
+version: '2'
+services:
+  db1:
+    image: mariadb:10.3
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: vaulttestdb
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+    networks:
+      nw1:
+        ipv4_address: 172.16.2.10
+        aliases:
+          - db1
+
+  vault-server:
+    image: vault
+    environment:
+      VAULT_ADDR: "http://vault-server:8200"
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_USER: root
+      VAULT_ROLE_ID: "db-role-id"
+      VAULT_SECRET_ID: "db-secret-id"
+    command: vault server -config=/vault/vault-config -log-level=debug
+    volumes:
+      - ./vault-server-config.hcl:/vault/vault-config
+      - ./vault-role-id:/vault/vault-role-id
+      - ./vault-secret-id:/vault/vault-secret-id
+      - ./configuration.sh:/vault/configuration.sh
+      - ./policy.hcl:/vault/policy.hcl
+    cap_add:
+      - IPC_LOCK
+    networks:
+      nw1:
+        ipv4_address: 172.16.2.20
+        aliases:
+          - vault-server
+
+  vault-agent:
+    image: vault
+    environment:
+      VAULT_AGENT_ADDR: "http://vault-agent:8007"
+      VAULT_ROLE_ID: "db-role-id"
+      VAULT_SECRET_ID: "db-secret-id"
+    command: vault agent -config=/vault/vault-config -log-level=debug
+    volumes:
+      - ./vault-agent-config.hcl:/vault/vault-config
+      - ./vault-role-id:/vault/vault-role-id
+      - ./vault-secret-id:/vault/vault-secret-id
+    cap_add:
+      - IPC_LOCK
+    networks:
+      nw1:
+        ipv4_address: 172.16.2.30
+        aliases:
+          - vault-agent
+
+  vault-client:
+    image: vault
+    environment:
+      VAULT_ADDR: "http://vault-server:8200"
+      VAULT_AGENT_ADDR: "http://vault-agent:8007"
+      VAULT_ROLE_ID: "db-role-id"
+      VAULT_SECRET_ID: "db-secret-id"
+    networks:
+      nw1:
+        ipv4_address: 172.16.2.40
+        aliases:
+          - vault-client
+
+
+networks:
+  nw1:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv4: "true"
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.2.0/24
+          gateway: 172.16.2.254
