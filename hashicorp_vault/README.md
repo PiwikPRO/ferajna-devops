@@ -1,19 +1,20 @@
 # Simple test environment for hashicorp vault
-* mariadb 10.3 (db1)
-* vault server (vault-server)
-* vault agent (vault-agent)
-* vault client (vault-client)
+* docker images
+  * mariadb 10.3
+  * vault server
+  * vault agent
+  * vault client
 
 ## How it works
 * ./start.sh to start environment
-  - create single database nose
-  - crate vault server
+  - create single database node
+  - create vault server
     - initialize vault
     - unseal (provide 3 keys)
     - login to vault (provide root token)
     - load configuration
   - create vault agent
-    - Enable auto auth by login to vault server using approle role id and secret id
+    - enable auto auth by login to vault server using approle auth method - role id and secret id
     - enable caching
   - create vault client
   - create vault_token.log (with root token)
