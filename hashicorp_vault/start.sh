@@ -49,6 +49,9 @@ function start_vault_client {
   docker-compose ${DC_ARGS} up -d vault-client
 
   waitForContainerLogEntry vault-client "Vault server started" 180
+
+  docker-compose ${DC_ARGS} exec vault-client wget https://releases.hashicorp.com/consul-template/0.22.0/consul-template_0.22.0_linux_amd64.tgz
+  docker-compose ${DC_ARGS} exec vault-client tar -zxf consul-template_0.22.0_linux_amd64.tgz
 }
 
 start_databases

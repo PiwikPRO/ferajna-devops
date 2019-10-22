@@ -25,7 +25,13 @@ vault write database/roles/my-role \
     default_ttl="2m" \
     max_ttl="5m"
 
-# auth method for vault (using role id and secret it)
+# enable approle - auth method for vault agent (using role id and secret it)
 vault auth enable approle
 vault write auth/approle/role/dbwebapp policies="dbpolicy" role_id="${VAULT_ROLE_ID}"
 vault write auth/approle/role/dbwebapp/custom-secret-id secret_id="${VAULT_SECRET_ID}"
+
+# enable userpass - auth method
+vault auth enable userpass
+vault write auth/userpass/users/test \
+    password=test123 \
+    policies=dbpolicy

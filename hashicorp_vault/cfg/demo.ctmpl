@@ -1,0 +1,3 @@
+{{ with secret "database/creds/my-role" }}
+username: {{ .Data.username }}
+password: {{ .Data.password }}{{ end }}
