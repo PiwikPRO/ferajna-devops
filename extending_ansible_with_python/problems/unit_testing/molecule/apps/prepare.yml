@@ -1,0 +1,11 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: Run flask server in development mode
+    command: flask run
+    environment:
+      FLASK_APP: /opt/apps_mock.py
+    async: 43200
+    poll: 0

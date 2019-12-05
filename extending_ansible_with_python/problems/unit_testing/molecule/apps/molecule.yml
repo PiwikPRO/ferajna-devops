@@ -1,0 +1,54 @@
+---
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: ubuntu_xenial
+    image: paulfantom/ubuntu-molecule:16.04
+    command: /sbin/init
+    capabilities:
+      - SYS_ADMIN
+      - NET_ADMIN
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  # - name: centos_7
+  #   image: paulfantom/centos-molecule:7
+  #   command: /sbin/init
+  #   capabilities:
+  #     - SYS_ADMIN
+  #     - NET_ADMIN
+  #   volumes:
+  #     - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  # - name: debian_jessie
+  #   image: paulfantom/debian-molecule:8
+  #   command: /sbin/init
+  #   capabilities:
+  #     - SYS_ADMIN
+  #     - NET_ADMIN
+  #   volumes:
+  #     - /sys/fs/cgroup:/sys/fs/cgroup:ro
+provisioner:
+  name: ansible
+  config_options:
+    defaults:
+      remote_tmp: $HOME/.ansible/tmp
+      local_tmp: $HOME/.ansible/tmp
+  lint:
+    name: ansible-lint
+scenario:
+  name: apps
+  test_sequence:
+    - destroy
+    - dependency
+    - syntax
+    - create
+    - prepare
+    - converge
+    - side_effect
+    - verify
+    - destroy
+verifier:
+  name: testinfra
+  lint:
+    name: flake8

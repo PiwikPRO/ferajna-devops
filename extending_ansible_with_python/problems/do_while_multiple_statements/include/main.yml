@@ -1,0 +1,12 @@
+- hosts: localhost
+  gather_facts: false
+  become: false
+  tasks:
+
+    - include_tasks: inner.yml
+      until:
+        - 'first_call.status == 200 and second call is defined and second_call.status == 200'
+    
+    - debug:
+        msg: "{{ first_call.status }}, {{ second_call.status | default(None) }}"
+  

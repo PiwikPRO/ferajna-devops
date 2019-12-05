@@ -1,0 +1,10 @@
+- hosts: localhost
+  gather_facts: false
+  become: false
+  tasks:
+   - include_tasks: recursive.yml
+  
+   - debug:
+       msg: "{{ first_call.status }}, {{ second_call.status }}"
+
+  

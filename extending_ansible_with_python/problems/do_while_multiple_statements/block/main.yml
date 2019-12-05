@@ -1,0 +1,19 @@
+- hosts: localhost
+  gather_facts: false
+  become: false
+  tasks:
+    - block:
+
+      - uri:
+          url: http://127.0.0.1:5000/foo
+        failed_when: false
+        register: first_call
+
+      - uri:
+          url: "http://127.0.0.1:5000/bar?baz={{ first_call.json.foo | default('0') }}"
+        failed_when: false
+        when: first_call.json is defined
+        register: second_call
+    
+      until:
+        - 'first_call.status == 200 and second_call.status == 200'

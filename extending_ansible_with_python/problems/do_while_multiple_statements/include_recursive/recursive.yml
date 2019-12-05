@@ -1,0 +1,13 @@
+- uri:
+    url: http://127.0.0.1:5000/foo
+  failed_when: false
+  register: first_call
+
+- uri:
+    url: "http://127.0.0.1:5000/bar?baz={{ first_call.json.foo | default('0') }}"
+  failed_when: false
+  when: first_call.json is defined
+  register: second_call
+
+- include_tasks: recursive.yml
+  when: 'first_call.status != 200 or second_call.status != 200'

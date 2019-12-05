@@ -1,0 +1,8 @@
+tox
+tox-travis
+tox-pyenv
+gitlint
+molecule~=2.19.0
+ansible-lint
+yamllint
+docker-py
