@@ -18,7 +18,7 @@ How to do this in Ansible?
 * We can try approach with `block`, but it turns out it does not work, you can not put `until` on `block` statements. 
     * https://github.com/ansible/ansible/issues/46203
 
-* We try with include, but this does not work neither, it silently does only one loop.
+* We try with include, but this does not work neither, it silently does only one loop or crashes with error, depending on ansible version.
 
 * Recursive include works, but does not seem to be very ellegant.
 
