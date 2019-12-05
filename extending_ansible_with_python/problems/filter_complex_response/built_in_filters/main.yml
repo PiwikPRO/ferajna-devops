@@ -1,0 +1,14 @@
+- hosts: localhost
+  gather_facts: false
+  become: false
+  tasks:
+
+  - uri:
+      url: http://127.0.0.1:5000
+    register: the_call
+    until: "{{ the_call.json.meta.instances | selectattr('name', 'match', 'piwik-data-processing-organization\\d') | map(attribute='state') | unique | list  == ['stopped']}}"
+    retries: 100
+    delay: 1
+  
+  - debug:
+      msg: "{{ the_call.json }}"

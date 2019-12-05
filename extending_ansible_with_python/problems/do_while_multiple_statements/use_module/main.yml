@@ -1,0 +1,17 @@
+- hosts: localhost
+  gather_facts: false
+  become: false
+  tasks:
+    
+   - foobar:
+       host: localhost
+       port: 5000
+     until: foobar_result.rc == 0
+     retries: 100
+     delay: 1
+     register: foobar_result
+  
+   - debug:
+       msg: "{{ foobar_result }}"
+
+  

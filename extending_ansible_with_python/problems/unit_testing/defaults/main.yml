@@ -1,0 +1,8 @@
+api_server_proto: http
+api_server_hostname: localhost
+api_server_port: 5000
+
+api_server_addr: "{{ api_server_proto }}://{{ api_server_hostname }}:{{ api_server_port }}"
+
+# In normal scenario this would be probably obtained dynamically
+api_server_jwt: "fooBar123"

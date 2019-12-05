@@ -1,0 +1,29 @@
+---
+
+- name: "Retrieve list of apps in organization"
+  uri:
+    url: "{{ api_server_addr }}/api/apps/v2"
+    headers:
+      Authorization: "Bearer {{ api_server_jwt }}"
+      "Content-Type": "application/json"
+    return_content: yes
+  register: uninstaller_app_list_response
+  failed_when: uninstaller_app_list_response.status != 200
+
+- name: Parse the list of apps 
+  set_fact:
+    uninstaller_app_list: "{{ ((uninstaller_app_list_response.content | from_json).data) }}"
+
+- name: Delete all but first app (it is required to be present for some reason)
+  uri:
+    url: "{{ api_server_addr }}/api/apps/v2/{{ item.id }}"
+    method: "DELETE"
+    headers:
+      Authorization: "Bearer {{ api_server_jwt }}"
+      "Content-Type": "application/json"
+  register: uninstaller_app_remove_response
+  with_items:
+    - "{{ uninstaller_app_list }}"
+  loop_control:
+    label: "{{ item.attributes.name }}"
+  failed_when: uninstaller_app_remove_response.status != 204
