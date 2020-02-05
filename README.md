@@ -2,6 +2,14 @@
 
 
 
+## 29.01.2020
+- barman - PiwikPRO k8s way  @kosto
+- [gitops with flux](https://github.com/PiwikPRO/ferajna-devops/tree/master/gitops_flux) @jacekl
+
+* cardinality:
+    * local: 15
+    * remote: 4
+
 ## 05.12.2019
 - [Extending ansible with python](https://github.com/PiwikPRO/ferajna-devops/tree/master/extending_ansible_with_python) @kosto
 - [InnoDB cluster](https://github.com/PiwikPRO/ferajna-devops/tree/master/innodb_cluster) @jacekl
