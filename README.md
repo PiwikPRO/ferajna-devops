@@ -2,6 +2,17 @@
 
 
 
+## 03.04.202
+- Wojciech Chojnowski: Go - trudny początek drogi od admina do DevOpsa [PL]
+- Bartłomiej Kasperski: Juju - prosty i szybki deployment OpenStacka [PL]
+
+
+* cardinality:
+    * local: 30
+    * remote: 2
+
+
+
 ## 29.01.2020
 - barman - PiwikPRO k8s way  @kosto
 - [gitops with flux](https://github.com/PiwikPRO/ferajna-devops/tree/master/gitops_flux) @jacekl
