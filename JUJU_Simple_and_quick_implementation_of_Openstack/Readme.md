@@ -1,9 +1,9 @@
 # JUJU Simple and quick implementation of Openstack 
 
-##
+## Prezentation
 - [Prezentation](https://github.com/PiwikPRO/ferajna-devops/blob/master/JUJU_Simple_and_quick_implementation_of_Openstack/JUJU%20-%20Openstack.pdf) @ox1depl
 
-##
+## Exapmle
 - [Example openstack charm to quick deployment](https://jaas.ai/openstack-base/bundle/60)
 
 ## Sources and usefull links
