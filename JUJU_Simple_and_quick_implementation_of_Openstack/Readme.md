@@ -1,7 +1,7 @@
 # JUJU Simple and quick implementation of Openstack 
 
 ##
-- [Prezentation](LINK) @ox1depl
+- [Prezentation](https://github.com/PiwikPRO/ferajna-devops/JUJU_Simple_and_quick_implementation_of_Openstack/JUJU%20-%20Openstack.pdf) @ox1depl
 
 ##
 - [Example openstack charm to quick deployment](https://jaas.ai/openstack-base/bundle/60)
@@ -15,6 +15,6 @@
 - [docs.openstack.org/openstack-ansible/latest/](https://docs.openstack.org/openstack-ansible/latest/)
 - [docs.openstack.org/train/deploy/](https://docs.openstack.org/train/deploy/)
 - [docs.openstack.org/project-deploy-guide/tripleo-docs/latest/](https://docs.openstack.org/project-deploy-guide/tripleo-docs/latest/)
-- [wiki.openstack.org/wiki/Heat](htps://wiki.openstack.org/wiki/Heat)
-- [www.youtube.com/watch?v=LM1ANSge01g](Automated OpenStack Deployment: A Comparison)
-- [www.youtube.com/watch?v=bHKiKnlKk_k](Deploying Openstack with Juju and MAAS)
+- [wiki.openstack.org/wiki/Heat](https://wiki.openstack.org/wiki/Heat)
+- [Automated OpenStack Deployment: A Comparison](https://www.youtube.com/watch?v=LM1ANSge01g)
+- [Deploying Openstack with Juju and MAAS](https://www.youtube.com/watch?v=bHKiKnlKk_k)
