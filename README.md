@@ -1,17 +1,20 @@
 # ferajna-devops
 
+## 10.03.2021
+- Adam Zarecki & Błażej Frydlewicz: [Bazy danych w kontenerach na przykładzie Altinity Clickhouse Operator dla Kubernetesa](ttps://github.com/PiwikPRO/ferajna-devops/tree/master/clickhouse-operator/) [PL]
+- Jarosław Zywert: Tilt - sposób na lokalny development na promilu [PL]
 
+* cardinality:
+    * local: 15
+    * remote: 5
 
-## 03.04.202
+## 03.04.2020
 - Wojciech Chojnowski: Go - trudny początek drogi od admina do DevOpsa [PL]
 - Bartłomiej Kasperski: Juju - prosty i szybki deployment OpenStacka [PL]
-
 
 * cardinality:
     * local: 30
     * remote: 2
-
-
 
 ## 29.01.2020
 - barman - PiwikPRO k8s way  @kosto
