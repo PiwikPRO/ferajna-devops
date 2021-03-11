@@ -1,7 +1,7 @@
 # ferajna-devops
 
 ## 10.03.2021
-- Adam Zarecki & Błażej Frydlewicz: [Bazy danych w kontenerach na przykładzie Altinity Clickhouse Operator dla Kubernetesa](ttps://github.com/PiwikPRO/ferajna-devops/tree/master/clickhouse-operator/) [PL]
+- Adam Zarecki & Błażej Frydlewicz: [Bazy danych w kontenerach na przykładzie Altinity Clickhouse Operator dla Kubernetesa](https://github.com/PiwikPRO/ferajna-devops/tree/master/clickhouse-operator/) [PL]
 - Jarosław Zywert: Tilt - sposób na lokalny development na promilu [PL]
 
 * cardinality:
