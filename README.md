@@ -1,6 +1,13 @@
 # ferajna-devops
 
+## 03.04.202
+- Adam Zarecki & Błażej Frydlewicz: Bazy danych w kontenerach na przykładzie Altinity Clickhouse Operator dla Kubernetesa [PL]
+- Jarosław Zywert: [Tilt - sposób na lokalny development na promilu](tilt-as-new-dev-env) [PL]
 
+
+* cardinality:
+    * local: TBA
+    * remote: TBA
 
 ## 03.04.202
 - Wojciech Chojnowski: Go - trudny początek drogi od admina do DevOpsa [PL]
