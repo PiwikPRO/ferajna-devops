@@ -1,0 +1,25 @@
+{
+  "name": "redis-not-so-boring",
+  "version": "1.0.0",
+  "description": "## Presentation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PiwikPRO/ferajna-devops.git"
+  },
+  "keywords": [
+    "redis"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PiwikPRO/ferajna-devops/issues"
+  },
+  "homepage": "https://github.com/PiwikPRO/ferajna-devops#readme",
+  "dependencies": {
+    "reveal-md": "^5.0.0"
+  }
+}
