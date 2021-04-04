@@ -27,7 +27,7 @@ case "${COMMAND}" in
     ;;
   connect)
     echo "After bash prompt is shown, please run:"
-    echo ">>> redis-cli -h cluster-redis-cluster"
+    echo ">>> redis-cli -c -h cluster-redis-cluster"
     echo ""
     kubectl run --namespace default cluster-redis-client --rm --tty -i --restart='Never' \
         --image docker.io/bitnami/redis-cluster:6.2.1-debian-10-r23 -- bash
@@ -36,7 +36,7 @@ case "${COMMAND}" in
     $HELM_BINARY repo add bitnami https://charts.bitnami.com/bitnami
     $KIND_BINARY create cluster --name redis-cluster-demo
     $HELM_BINARY install cluster bitnami/redis-cluster \
-      --set cluster.nodes=6 \
+      --set cluster.nodes=9 \
       --set cluster.replicas=2 \
       --set usePassword=false
     ;;
