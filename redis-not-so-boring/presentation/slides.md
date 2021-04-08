@@ -19,8 +19,10 @@ Marcin Malczewski
 
 ---
 
-<!-- Generat featurs -->
+<!-- General featurs -->
 ### General features
+
+* ACLs
 
 ---
 
@@ -100,13 +102,91 @@ Transactions, multiple key operations and LUA scripts can be only used with keys
 * connecting via redis-cli with and without `-c` parameter, trying to fetch data outside of owned hash slot range
 
 
+---
+
+<!-- Redis sentinel section -->
+### Clustering
+
+Redis Sentinel
+
+----
+
+#### Basic info
+
+* Clustering solution for Redis
+* Master / replica (formerly slave) architecture
+* Automatic failover when master fails
+
+
+----
+
+#### Replication diagram
+
+![https://miro.com/app/board/o9J_lLrOtDw=/](redis-cluster/topology-sentinel.png)
+
+----
+
+#### Replication fundamentals
+
+* Sentinel process is independent of Redis, can be even deployed on separate machine
+* One sentinel can monitor multiple Redis clusters
+* Sentinels form a clusters, where they select, monitor and configure Redis master and replicas
+
+----
+#### Replication configuration for replicas
+
+Can be skipped if using `known-replicas` in sentinel
+
+```
+SLAVEOF 192.168.0.5 6379
+```
+
+----
+#### Replication configuration for sentinel
+
+```
+sentinel monitor clustername 192.168.0.5 6379 2
+
+# Can be skipped if using `SLAVEOF MASTER` in replica
+sentinel known-slave clustername 192.168.0.6 6379
+```
+
+Sentinel detects other sentinels and replicas using redis pub/sub mechanism
+
+----
+#### Replication tuning
+
+```
+# Stop accepting writes if cannot write to this many replicas
+min-slaves-to-write 1
+
+# After that many time since key received
+min-slaves-max-lag 30
+```
 
 ---
 
 <!-- Persistence section -->
-### Presistence
+### Persistence
 
-persistence
+To RDB or to AOF?
+
+----
+#### Redis Database
+
+Point-in-time snapshots of your dataset at specified interval
+
+* small size
+* doesn't affect performance heavily
+* it makes sense to perform the snapshot every x minutes, so not all data is persisted
+
+----
+#### Append only file
+
+* flushes every write to disk in for of log
+* can be synchronous or periodic, eg. every 1 second
+* automatically rewritten after it gets big
+* it's bigger and can impact performance
 
 ---
 <!-- Security section -->
