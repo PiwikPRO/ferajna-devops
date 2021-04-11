@@ -9,19 +9,22 @@ Marcin Malczewski
 ## Agenda
 
 - what is it and general features
-- replication - sentiner vs cluster
+- replication - cluster and sentinel
 - persistence
-- security - pre 6.0 hacks and 6.0+ ACLs
 
 ---
 <!-- What is it section -->
 ### What is it
+
+Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache, and message broker
 
 ---
 
 <!-- General featurs -->
 ### General features
 
+* k/v store for strings, sets, lists, hashes (map/dict)
+* pubsub
 * ACLs
 
 ---
@@ -85,7 +88,7 @@ Transactions, multiple key operations and LUA scripts can be only used with keys
 ----
 #### Replication model
 
-![https://miro.com/app/board/o9J_lLrOtDw=/](redis-cluster/topology-sharding.png)
+![https://miro.com/app/board/o9J_lLrOtDw=/](redis-cluster/topology-replication.png)
 
 ----
 #### Replication - replicas
@@ -154,6 +157,18 @@ sentinel known-slave clustername 192.168.0.6 6379
 Sentinel detects other sentinels and replicas using redis pub/sub mechanism
 
 ----
+#### Replication example
+
+
+![https://miro.com/app/board/o9J_lLrOtDw=/](redis-cluster/failover-initial.png)
+
+----
+#### Replication example
+
+
+![https://miro.com/app/board/o9J_lLrOtDw=/](redis-cluster/failover-partition.png)
+
+----
 #### Replication tuning
 
 ```
@@ -162,7 +177,10 @@ min-slaves-to-write 1
 
 # After that many time since key received
 min-slaves-max-lag 30
+
+# Also applicable in Redis Cluster!
 ```
+
 
 ---
 
@@ -186,16 +204,7 @@ Point-in-time snapshots of your dataset at specified interval
 * flushes every write to disk in for of log
 * can be synchronous or periodic, eg. every 1 second
 * automatically rewritten after it gets big
-* it's bigger and can impact performance
 
 ---
-<!-- Security section -->
-### Security
 
-----
-
-#### Pre 6.0 hacks
-
-----
-
-#### 6.0+ ACLs
+### Questions
