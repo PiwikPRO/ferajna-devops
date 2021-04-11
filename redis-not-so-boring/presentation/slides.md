@@ -27,12 +27,46 @@ Redis is an open source (BSD licensed), in-memory data structure store, used as 
 * pubsub
 * ACLs
 
+
+---
+
+<!-- Redis replication section -->
+### Replication
+
+----
+
+#### Replication backlog
+
+Replication backlog is a circular buffer (FIFO), where Redis keeps most recent writes to master
+
+----
+#### Full vs. Partial sync
+
+Depending on current replica state related to master, upon connection it can use:
+* Partial sync if replica's state is within master's replication backlog
+* Full RDB snapshot sync from master
+    * Beware of timeouts!
+
+----
+#### Client output buffer
+
+Each redis client has it's own output buffer (default limit 256MB), where Redis main thread writes data, that is then asynchronously transferred to the socket by other thread
+
+
+----
+#### Total memory usage of replicated Redis
+
+
+![https://miro.com/app/board/o9J_lLrOtDw=/](img/memory.png)
+
+
 ---
 
 <!-- Redis cluster section -->
 ### Clustering
 
 Redis Cluster
+
 
 ----
 
@@ -46,7 +80,7 @@ Redis Cluster
 ----
 #### Sharding
 
-![https://miro.com/app/board/o9J_lLrOtDw=/](redis-cluster/topology-sharding.png)
+![https://miro.com/app/board/o9J_lLrOtDw=/](img/topology-sharding.png)
 
 ----
 #### Sharding - hash slots
@@ -86,12 +120,12 @@ Clients connecting to Redis in cluster mode must be cluster aware, which means:
 Transactions, multiple key operations and LUA scripts can be only used with keys from the same hash slot. There is a possibility of enforcing placement on the same hash slot using hash tags (a `{...}` sub-string that happens to be identical for each key that should be placed on the same hash slot)
 
 ----
-#### Replication model
+#### Cluster model
 
-![https://miro.com/app/board/o9J_lLrOtDw=/](redis-cluster/topology-replication.png)
+![https://miro.com/app/board/o9J_lLrOtDw=/](img/topology-replication.png)
 
 ----
-#### Replication - replicas
+#### Cluster - replicas
 
 * Each master node can have from 0 to n replicas (formerly slaves, currently both terms are used)
 * Replicas can be be read from, providing that client explicitly declares, that it's `READONLY`. Otherwise all operations on replica will be `MOVED` to master, telling the client to reconnect
@@ -123,26 +157,17 @@ Redis Sentinel
 
 ----
 
-#### Replication diagram
+#### Sentinel diagram
 
-![https://miro.com/app/board/o9J_lLrOtDw=/](redis-cluster/topology-sentinel.png)
+![https://miro.com/app/board/o9J_lLrOtDw=/](img/topology-sentinel.png)
 
 ----
 
-#### Replication fundamentals
+#### Sentinel fundamentals
 
 * Sentinel process is independent of Redis, can be even deployed on separate machine
 * One sentinel can monitor multiple Redis clusters
 * Sentinels form a clusters, where they select, monitor and configure Redis master and replicas
-
-----
-#### Replication configuration for replicas
-
-Can be skipped if using `known-replicas` in sentinel
-
-```
-SLAVEOF 192.168.0.5 6379
-```
 
 ----
 #### Replication configuration for sentinel
@@ -157,16 +182,16 @@ sentinel known-slave clustername 192.168.0.6 6379
 Sentinel detects other sentinels and replicas using redis pub/sub mechanism
 
 ----
-#### Replication example
+#### Sentinel example
 
 
-![https://miro.com/app/board/o9J_lLrOtDw=/](redis-cluster/failover-initial.png)
+![https://miro.com/app/board/o9J_lLrOtDw=/](img/failover-initial.png)
 
 ----
-#### Replication example
+#### Sentinel example
 
 
-![https://miro.com/app/board/o9J_lLrOtDw=/](redis-cluster/failover-partition.png)
+![https://miro.com/app/board/o9J_lLrOtDw=/](img/failover-partition.png)
 
 ----
 #### Replication tuning
@@ -195,6 +220,7 @@ To RDB or to AOF?
 Point-in-time snapshots of your dataset at specified interval
 
 * small size
+* uses fork and shares memory pages with parent process
 * doesn't affect performance heavily
 * it makes sense to perform the snapshot every x minutes, so not all data is persisted
 
