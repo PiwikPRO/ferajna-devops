@@ -41,7 +41,7 @@ Redis is an open source (BSD licensed), in-memory data structure store, used as 
 
 #### Replication backlog
 
-Replication backlog is a circular buffer (FIFO), where Redis keeps most recent writes to master
+Replication backlog is a circular buffer (FIFO), where each Redis instance keeps its most recent writes
 
 ----
 #### Full vs. Partial sync
@@ -94,7 +94,7 @@ Each key is assigned to one of 16384 hash slots. To compute hash slot for given 
 ----
 #### Hash slots example
 
-Hash slot ranges are distributed between the master nodes. For example if we have three master nodes, we can allocate the hash slots as follows:
+Hash slots are distributed between the master nodes. For example if we have three master nodes, we can allocate the hash slots as follows:
 
 * Master[0] -> Slots 0 - 5460
 * Master[1] -> Slots 5461 - 10922
@@ -115,8 +115,8 @@ CLUSTER ADDSLOTS 1 2 3  # and so on
 
 Clients connecting to Redis in cluster mode must be cluster aware, which means:
 
-* The need to understand `MOVED` commands if the node the client would like to perform operation on is not able to complete it
 * Hash slots awareness and CRC16 calculated on client side
+* The need to understand `MOVED` commands if the node the client would like to perform operation on is not able to complete it
 
 ----
 #### Sharding limitations 2
@@ -171,7 +171,7 @@ Redis Sentinel
 
 * Sentinel process is independent of Redis, can be even deployed on separate machine
 * One sentinel can monitor multiple Redis clusters
-* Sentinels form a clusters, where they select, monitor and configure Redis master and replicas
+* Sentinels form a cluster, that monitors and configures Redis master and replicas
 
 ----
 #### Replication configuration for sentinel
@@ -201,15 +201,14 @@ Sentinel detects other sentinels and replicas using redis pub/sub mechanism
 #### Replication tuning
 
 ```
-# Stop accepting writes if cannot write to this many replicas
+# Accept writes only if this many replicas
 min-slaves-to-write 1
 
-# After that many time since key received
+# Have lag lesser than that many seconds
 min-slaves-max-lag 30
 
 # Also applicable in Redis Cluster!
 ```
-
 
 ---
 
