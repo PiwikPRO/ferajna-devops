@@ -248,7 +248,9 @@ Publish/Subscribe messaging
 
 Asynchronous messaging service that decouples services that produce events from services that process events.
 
-e.g. send updated data from server to one or multiple clients (WebSockets, SSE)
+- send updated data from server to one or multiple clients (WebSockets, SSE)
+- implement chat functionality - sending one message to multiple users (broadcast)
+
 
 ----
 #### Messages
@@ -397,16 +399,8 @@ The default policy is **noeviction**.
 
 Starting with Redis version 4.0, a new LFU (Least Frequently Used) eviction policies was added.
 
-- **volatile-lfu** - evict using approximated LFU among the keys with an expire set.
+- **volatile-lfu** - evict using approximated LFU among the keys with an *expire set*.
 - **alkeys-lfu** - evict any key using approximated LFU
-
-----
-
-#### Using proper policy
-
-- use the **allkeys-lru** policy when you expect that a subset of elements will be accesses far more often than the rest. Good pick if you are unsure.
-- use the **allkeys-random** if you have a cyclic access when you expect the distribution to be uniform
-- use the **volatile-ttl** if you want to use different TTL for your cached objects
 
 ----
 
@@ -420,21 +414,24 @@ Starting with Redis version 4.0, a new LFU (Least Frequently Used) eviction poli
 
 #### How eviction works
 
-- LFU uses propabilistic [Morris counter](https://en.wikipedia.org/wiki/Approximate_counting_algorithm), in order to the object access frequency using just a few bits per object, combined with a decay period so the counter is reduced over time.
+- LFU uses propabilistic [Morris counter](https://en.wikipedia.org/wiki/Approximate_counting_algorithm),
+ in order to keep object access frequency. It is combined with a decay period so the counter is reduced over time.
 
 ----
 #### How eviction works
 
 
-- LFU has additional configurable parameters
-- *lfu-log-factor* - how many hits are needed in order to saturate the frequency counter
-- *lfu-decay-time* - amount of minutes a counter should be decayed, when sampled and found to be older that that value
+LFU has additional configurable parameters
 
-----
-#### Using proper policy
+```
+# how many hits are needed in order to saturate the frequency
+# counter (logaritmic scale - 1 milion)
+lfu-log-factor 10
 
-- **volatile-lru** and **volatile-random** are useful when you wan to use single instance for both caching and to have a set of persistent keys.
-- using **alleys-lru** is more memory efficient so there is no need to set an expire for the key to be evicted under memory pressure.
+# amount of minutes a counter should be decayed,
+# when sampled and found to be older that that value
+lfu-decay-time 1
+```
 
 
 ---
@@ -489,6 +486,16 @@ EOF
 - transactions are bloking - with slow transaction other clients will wait
 - you can't use intermediate values from subsequent commands (only the list of the responses)
 - there is no rollback mechanism like in traditional RDBMS
+
+----
+#### Transactions
+
+```
+MULTI
+INCR counter1
+INCR counter2
+EXEC
+```
 
 ----
 #### Transactions
@@ -551,9 +558,28 @@ except WatchError:
 #### Lua scripts
 
 ```
-DEL mykeys
-LPUSH mykeys a b c
-EVAL "return redis.call('LRANGE', 'mykeys', 0, -1)" 0
+RPUSH region:eu-west count:ireland count:london count:paris
+MGET count:ireland
+MGET count:london
+MGET count:paris
+```
+
+```
+cat << EOF > /tmp/example.lua
+redis.call('ECHO', 'Increment all subcounters in ' .. KEYS[1])
+local count=0
+local broadcast=redis.call("LRANGE", KEYS[1], 0,-1)
+for _,key in ipairs(broadcast) do
+    redis.call("INCR",key)
+    redis.call('ECHO', 'Increment counter ' .. key)
+    count=count+1
+end
+return count
+EOF
+```
+
+```
+redis-cli -c -h cluster-redis-cluster --eval /tmp/example.lua region:eu-west
 ```
 
 ----
