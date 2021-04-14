@@ -78,7 +78,7 @@ Redis Cluster
 
 * sharding across nodes
 * online resharding
-* some degree of partition tolerance
+* some degree of network fragmentation tolerance
 
 
 ----
@@ -170,7 +170,7 @@ Redis Sentinel
 #### Sentinel fundamentals
 
 * Sentinel process is independent of Redis, can be even deployed on separate machine
-* One sentinel can monitor multiple Redis clusters
+* One sentinel can monitor multiple Redis masters, that have different replicas
 * Sentinels form a cluster, that monitors and configures Redis master and replicas
 
 ----
