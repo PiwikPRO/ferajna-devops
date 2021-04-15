@@ -3,7 +3,7 @@
 
 ## 14.04.2021
 - Konstanty Karagiorgis & Marcin Malczewski: [Redis - nie taki nudny jak się wydaje](https://github.com/PiwikPRO/ferajna-devops/tree/master/redis-not-so-boring/) [PL]
-- Beata Szeląg: Co Kubernetes ma pod maską? cz. 1 [PL]
+- Beata Szeląg: [Co Kubernetes ma pod maską? cz. 1](kubernetes_under_the_hood) [PL]
 
 * cardinality:
     * local: 3
