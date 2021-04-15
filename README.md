@@ -1,6 +1,16 @@
 # ferajna-devops
 
-## 03.04.202
+
+## 14.04.2021
+- Konstanty Karagiorgis & Marcin Malczewski: [Redis - nie taki nudny jak się wydaje](https://github.com/PiwikPRO/ferajna-devops/tree/master/redis-not-so-boring/) [PL]
+- Beata Szeląg: Co Kubernetes ma pod maską? cz. 1 [PL]
+
+* cardinality:
+    * local: 3
+    * remote: 20
+
+
+## 10.03.2021
 - Adam Zarecki & Błażej Frydlewicz: [Bazy danych w kontenerach na przykładzie Altinity Clickhouse Operator dla Kubernetesa](https://github.com/PiwikPRO/ferajna-devops/tree/master/clickhouse_operator/) [PL]
 - Jarosław Zywert: [Tilt - sposób na lokalny development na promilu](tilt-as-new-dev-env) [PL]
 
