@@ -4,7 +4,7 @@
 [link](presentation.pdf)
 
 ### Demo
-This demo uses kind cluster in defult setup, but all these steps (except first one, with clustuer creation) should work on every working k8s cluster.
+This demo uses kind cluster in defult setup, but all these steps (except first one, with cluster creation) should work on every working k8s cluster.
 - create simple cluster: `kind create cluster`
 - redirect api server to port 8888: `kubectl proxy --port 8888`
 - get list of pods using curl (previous step is required): `curl http://127.0.0.1:8888/api/v1/pods`
