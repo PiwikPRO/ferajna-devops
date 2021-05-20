@@ -3,12 +3,12 @@
 ## 19.05.2021 #7
 * Piotr Miszkiel: Jak zrobić szkolenie/prezentację z użyciem OBS?
 * Arkadiusz Kotwica: Podstawy bezpieczeństwa na podstawie certyfikacji CompTIA
-* Bartosz Kondek: Co Kubernetes ma pod maską? cz. 2
+* Bartosz Kondek: [Co Kubernetes ma pod maską? cz. 2](https://github.com/PiwikPRO/ferajna-devops/tree/master/7/Kubernetes_under_the_hood_II.pdf)
   
  * cardinality:
     * local: 18
     * remote: 6
-  
+
 ## 14.04.2021 #6
 - Konstanty Karagiorgis & Marcin Malczewski: [Redis - nie taki nudny jak się wydaje](https://github.com/PiwikPRO/ferajna-devops/tree/master/redis-not-so-boring/) [PL]
 - Beata Szeląg: [Co Kubernetes ma pod maską? cz. 1](kubernetes_under_the_hood) [PL]
