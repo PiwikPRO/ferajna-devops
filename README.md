@@ -1,7 +1,7 @@
 # ferajna-devops
 
 ## 19.05.2021 #7
-* Piotr Miszkiel: Jak zrobić szkolenie/prezentację z użyciem OBS?
+* Piotr Miszkiel: [Jak zrobić szkolenie/prezentację z użyciem OBS?](https://github.com/PiwikPRO/ferajna-devops/tree/master/7/prezentacja-szkolenie-w-obs/) [PL]
 * Arkadiusz Kotwica: Podstawy bezpieczeństwa na podstawie certyfikacji CompTIA
 * Bartosz Kondek: [Co Kubernetes ma pod maską? cz. 2](https://github.com/PiwikPRO/ferajna-devops/tree/master/7/Kubernetes_under_the_hood_II.pdf)
   
