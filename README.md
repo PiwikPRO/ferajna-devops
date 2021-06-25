@@ -1,5 +1,15 @@
 # ferajna-devops
 
+
+## 23.06.2021 #8
+* Adam Tulejko: Jak działa wykrywanie sesji w ClickHouse i dlaczego nie wymagało przepisania 90% codebase'u? [PL]
+* Bartłomiej Kasperski: Automatyka domowa - Pierwsze kroki z Home Assistant [PL]
+  
+ * cardinality:
+    * local: 15
+    * remote: 8
+
+
 ## 19.05.2021 #7
 * Piotr Miszkiel: [Jak zrobić szkolenie/prezentację z użyciem OBS?](7/prezentacja-szkolenie-w-obs/) [PL]
 * Arkadiusz Kotwica: [Podstawy bezpieczeństwa na podstawie certyfikacji CompTIA](7/Security_Overview.pdf)
